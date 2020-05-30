@@ -192,7 +192,7 @@ class Dataset_NBV_Classification(Dataset):
     def __getitem__(self, index):
         path = os.path.join(self.dataset_dir, self.listfiles[index])
         data = np.load(path, allow_pickle=True)
-        return torch.Tensor(data.item()['X']).to(self.device), torch.Tensor(data.item()['y']).to(self.device).long()
+        return torch.Tensor(data.item()['X']), torch.Tensor(data.item()['y']).long()
     
     def generate_train_test(self, train_fraction=0.8):
         N = len(self)
