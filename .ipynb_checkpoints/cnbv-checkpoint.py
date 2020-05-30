@@ -178,3 +178,25 @@ class ToTensor(object):
         #grid = grid.transpose((2, 0, 1))
         return {'grid': torch.from_numpy(np.array([grid])),
                 'nbv_class': torch.tensor(nbv_class[0], dtype=torch.int64)}
+    
+    
+class Dataset_NBV_Classification(Dataset):
+    def __init__(self, dataset_dir='dataset', device='cpu'):
+        self.dataset_dir = dataset_dir
+        self.listfiles = os.listdir(dataset_dir)
+        self.device = device
+        
+    def __len__(self):
+        return len(self.listfiles)
+    
+    def __getitem__(self, index):
+        path = os.path.join(self.dataset_dir, self.listfiles[index])
+        data = np.load(path, allow_pickle=True)
+        return torch.Tensor(data.item()['X']).to(self.device), torch.Tensor(data.item()['y']).to(self.device)
+    
+    def generate_train_test(self, train_fraction=0.8):
+        N = len(self)
+        tr = int(N*train_fraction)
+        val = N - tr
+        self.train_dataset, self.test_dataset = torch.utils.data.dataset.random_split(dataset=self, lengths=[tr, val])
+        return self.train_dataset, self.test_dataset
