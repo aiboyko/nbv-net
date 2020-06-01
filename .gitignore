@@ -2,5 +2,4 @@ dataset
 *.pyc
 *.zip
 ds_link
-.ipynb_checkpoints
 *__pycache__
