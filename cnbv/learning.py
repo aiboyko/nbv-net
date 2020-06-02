@@ -1,6 +1,6 @@
 # Validation Function
 
-def validation(model, testloader, criterion):
+def validation(model, testloader, criterion, device='cpu'):
     test_loss = 0
     accuracy = 0
     N = 0

@@ -112,3 +112,28 @@ def showGrid4(grid, nbv = None, predicted_nbv = None):
     if predicted_nbv is not None:
         ax.quiver(position_pred[0], position_pred[1], position_pred[2], direction_pred[0], direction_pred[1], direction_pred[2], length=5.0, normalize=True, color = 'r')
     ax.view_init(elev=90.0, azim=0.0)
+
+    # # helpful function that displays the octree and the nbv
+# def visualize_output(test_grids, test_outputs, gt_nbvs=None, batch_size=batch_size):
+#     for i in range(batch_size):
+
+#         # un-transform the image data
+#         grid = test_grids[i].data   # get the image from it's wrapper
+#         grid = grid.numpy()   # convert to numpy array from a Tensor
+
+#         print(test_outputs[i].data.numpy())
+#         # un-transform the predicted nbv
+#         predicted = getPosition( test_outputs[i].data.numpy(), nbv_positions)
+#         #print(predicted)
+        
+#         print(gt_nbvs[i].numpy())
+#         gt = getPosition(gt_nbvs[i].numpy(), nbv_positions)
+#         #print(gt)
+        
+#         cnbv.showGrid(grid, gt, predicted)
+#         #plt.show()
+        
+#         if i==2:
+#             break
+
+# visualize_output(test_grids, test_outputs, np.squeeze(gt_nbvs))
