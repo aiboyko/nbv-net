@@ -23,19 +23,13 @@ class NBV_Net(nn.Module):
         self.pool3 = nn.MaxPool3d(kernel_size=(2,2,2), stride = (2,2,2))      
 
         # Five fully connected layers
-        self.fc1 = nn.Linear(512, 1500)   
+        self.fc1 = nn.Linear(512, 300)
         self.fc1_drop = nn.Dropout(dropout_prob)
 
-        self.fc2 = nn.Linear(1500, 500)
+        self.fc2 = nn.Linear(300, 100)
         self.fc2_drop = nn.Dropout(dropout_prob)      
 
-        self.fc3 = nn.Linear(500, 100)
-        self.fc3_drop = nn.Dropout(dropout_prob)      
-
-        self.fc4 = nn.Linear(100, 50)
-        self.fc4_drop = nn.Dropout(dropout_prob)   
-        
-        self.fc5 = nn.Linear(50, 14)
+        self.fc3 = nn.Linear(100, 14)
 
     def forward(self, x):
         ## feedforward behavior of NBV-net
@@ -52,15 +46,9 @@ class NBV_Net(nn.Module):
         x = self.fc1_drop(x)      
 
         x = F.relu(self.fc2(x))
-        x = self.fc2_drop(x)       
-
-        x = F.relu(self.fc3(x))
-        x = self.fc3_drop(x)       
-
-        x = F.relu(self.fc4(x)) 
-        x = self.fc4_drop(x)
+        x = self.fc2_drop(x)
         
-        x = F.relu(self.fc5(x)) 
+        x = F.relu(self.fc3(x))
         
         x = F.softmax(x, dim=1)
 

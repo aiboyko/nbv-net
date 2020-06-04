@@ -75,8 +75,8 @@ class Dataset_NBVC_Folder(Dataset):
         return torch.Tensor(data.item()['X']), torch.Tensor(data.item()['y']).long()
     
     def generate_train_test(self, train_fraction=0.8):
-        N = len(self)
-        tr = int(N*train_fraction)
-        val = N - tr
-        self.train_dataset, self.test_dataset = torch.utils.data.dataset.random_split(dataset=self, lengths=[tr, val])
+        full_size = len(self)
+        train_size = int(full_size*train_fraction)
+        validation_size = full_size - train_size
+        self.train_dataset, self.test_dataset = torch.utils.data.dataset.random_split(dataset=self, lengths=[train_size, validation_size])
         return self.train_dataset, self.test_dataset
