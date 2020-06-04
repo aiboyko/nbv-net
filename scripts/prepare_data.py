@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import sys
 
 
 def split_2(mydir = '../../dataset/', 
@@ -43,3 +44,11 @@ def split_2(mydir = '../../dataset/',
 
     np.save(file_train_lbl, ds_lbl_train)
     np.save(file_test_lbl, ds_lbl_validation)
+
+
+if __name__ == "__main__":
+    mydir = sys.argv[1]
+    file_vol = sys.argv[2]
+    file_lbl = sys.argv[3]
+
+    split_2(mydir, file_vol, file_lbl)
