@@ -19,5 +19,5 @@ python3 setup.py install
 
 
 ## Dataset
-The original dataset can be downloaded from [Kaggle](https://www.kaggle.com/miguelmg/nbv-dataset)
+The [original dataset](https://www.kaggle.com/miguelmg/nbv-dataset) can be downloaded from Kaggle
 
