@@ -15,5 +15,6 @@ setup(
     install_requires=['numpy>=1.18.3',
                       'matplotlib >= 3',
                       'torch >= 1.4',
-                      'torchvision'],
+                      'torchvision',
+                      'tqdm'],
 )

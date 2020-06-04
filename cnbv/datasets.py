@@ -71,6 +71,7 @@ class Dataset_NBVC_Folder(Dataset):
     
     def __getitem__(self, index):
         path = os.path.join(self.dataset_dir, self.listfiles[index])
+        print(path)
         data = np.load(path, allow_pickle=True)
         return torch.Tensor(data.item()['X']), torch.Tensor(data.item()['y']).long()
     
@@ -80,3 +81,55 @@ class Dataset_NBVC_Folder(Dataset):
         validation_size = full_size - train_size
         self.train_dataset, self.test_dataset = torch.utils.data.dataset.random_split(dataset=self, lengths=[train_size, validation_size])
         return self.train_dataset, self.test_dataset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Dataset_NBVC_modified(Dataset):
+    def __init__(self, dataset_dir='dataset', transform=None, device='cpu'):
+        self.dataset_dir = dataset_dir
+        self.listfiles = os.listdir(dataset_dir)
+        
+        path_to_labels = os.path.join(self.dataset_dir, self.listfiles[0])
+        path_to_grid = os.path.join(self.dataset_dir, self.listfiles[1])
+        
+        self.grid_data = np.load(path_to_grid)
+        self.nbv_class_data = np.load(path_to_labels)
+        
+        self.transform = transform
+        self.device = device
+    
+    def __len__(self):
+        return len(self.listfiles)
+    
+    def __getitem__(self, idx):
+        grid = self.grid_data[idx]
+        nbv_class = self.nbv_class_data[idx]
+        sample = {'grid': grid, 'nbv_class': nbv_class}
+        
+        if self.transform:
+            sample = self.transform(sample)
+        
+        return sample
+    
+    def generate_train_test(self, train_fraction=0.8):
+        full_size = len(self)
+        train_size = int(full_size*train_fraction)
+        validation_size = full_size - train_size
+        self.train_dataset, self.test_dataset = torch.utils.data.dataset.random_split(dataset=self, lengths=[train_size, validation_size])
+        return self.train_dataset, self.test_dataset
+

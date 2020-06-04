@@ -51,7 +51,7 @@ def train(model, optimizer, train_dataloader,  test_dataloader, criterion, devic
         history_epoch.append(e)
 
 
-        if calculate_eval:
+        if calculate_eval == True:
             model.eval()
             with torch.no_grad():
                 train_loss, train_accuracy = validation(model, train_dataloader, criterion, device)
@@ -64,6 +64,7 @@ def train(model, optimizer, train_dataloader,  test_dataloader, criterion, devic
                     "Val. Loss: {:.3f}.. ".format(val_loss),
                     "Train Accuracy: {:.3f}".format(train_accuracy),
                     "Val. Accuracy: {:.3f}".format(val_accuracy))
+            
             history_validation_loss.append(val_loss)
             history_train_accuracy.append(train_accuracy)
             history_validation_accuracy.append(val_accuracy)

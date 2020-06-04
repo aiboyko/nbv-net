@@ -17,8 +17,6 @@ def split_2(mydir = '../dataset/',
         dataset = np.load(path)
     	for split in ('test', 'train'):
     	
-    	
-    	
 
     path_input_lbl = os.path.join(mydir, file_lbl)
     
