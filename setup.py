@@ -10,7 +10,7 @@ setup(
     url='https://github.com/aiboyko/nbv-net',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=find_packages('cnbv'),
+    packages=find_packages(),
     platforms='any',
     install_requires=['numpy>=1.18.3',
                       'matplotlib >= 3',
