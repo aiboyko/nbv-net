@@ -2,25 +2,18 @@ import numpy as np
 import os
 
 
-def split_n():
-	pass
-    
-
-def split_2(mydir = '../dataset/', 
+def split_2(mydir = '../../dataset/', 
                file_vol = 'vol.npy', 
                file_lbl = 'lbl.npy'):
     
     files = {'vol': file_vol, 'lbl': file_lbl}
     
-    for label in ('vol', 'lbl'):
-        path = os.path.join(mydir, files[label])
-        dataset = np.load(path)
-    	for split in ('test', 'train'):
-    	
+#     for label in ('vol', 'lbl'):
+#         path = os.path.join(mydir, files[label])
+#         dataset = np.load(path)
+#     	for split in ('test', 'train'):
 
     path_input_lbl = os.path.join(mydir, file_lbl)
-    
-
     dataset_lbl = np.load(path_input_lbl)
 
     print("Volumes data size: \n", dataset_vol.shape)
