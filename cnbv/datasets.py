@@ -83,22 +83,6 @@ class Dataset_NBVC_Folder(Dataset):
         return self.train_dataset, self.test_dataset
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Dataset_NBVC_modified(Dataset):
     def __init__(self, dataset_dir='dataset', transform=None, device='cpu'):
         self.dataset_dir = dataset_dir
