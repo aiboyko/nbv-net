@@ -8,6 +8,7 @@ The modifications are authored by Alexey I. Boyko and Dmitry Smirnov as a part o
 ## Try simplified version (non-packaged) on Colab
 [PyTorch Colab](https://colab.research.google.com/github/aiboyko/nbv-net/blob/master/NBW_net.ipynb)
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/weiji14/deepbedmap/)
 
 ## Getting Started with the package
 ### Installation
