@@ -2,7 +2,7 @@ import argparse
 
 def get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str)
+    parser.add_argument('--dataset', type=str, default='dataset')
     parser.add_argument('--dataset_is_folder', action="store_true")
     parser.add_argument('--continuous_validation', action="store_true")
     parser.add_argument('--batch_size', type=int, default=64)

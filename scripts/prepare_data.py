@@ -6,7 +6,9 @@ import argparse
 def split_train_test(dataset_folder, 
                    file_vol, 
                    file_lbl,
-                   train_percent=0.8):
+                   train_percent=0.8, 
+                   seed=0):
+    "This script is made for splitting original 2 large dataset files into test and train"
     
 #     files = {'vol': file_vol, 'lbl': file_lbl}
     
@@ -14,10 +16,14 @@ def split_train_test(dataset_folder,
 #         path = os.path.join(dataset_folder, files[label])
 #         dataset = np.load(path)
 #     	for split in ('test', 'train'):
-
     
     path_vol = os.path.join(dataset_folder, file_vol)
+    
     dataset_vol = np.load(path_vol)
+    print('vols loaded')
+    
+    dataset_vol = dataset_vol.astype(np.float32)
+    print('vols type changed')
     
     path_lbl = os.path.join(dataset_folder, file_lbl)
     dataset_lbl = np.load(path_lbl)
