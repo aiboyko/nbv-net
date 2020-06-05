@@ -24,6 +24,10 @@ Due to a relatively large dataset and networks the workstation should have at le
 ## Dataset
 The [original dataset](https://www.kaggle.com/miguelmg/nbv-dataset) can be downloaded from Kaggle
 
+## Try on Colab
+[PyTorch Colab](https://colab.research.google.com/github/aiboyko/nbv-net/blob/master/NBW_net.ipynb)
+
+
 Extract it to ```/dataset``` and run ```scripts/dataset preparation.py```
   
 The package is organised using init, submodules and subpackages
