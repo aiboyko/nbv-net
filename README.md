@@ -11,13 +11,9 @@ The modifications are authored by Alexey I. Boyko and Dmitry Smirnov as a part o
 
 ## Getting Started with the package
 ### Installation
-- Clone this repo:
 ```bash
 git clone https://github.com/aiboyko/nbv-net
 cd nbv-net
-```
-- Build and install
-```bash
 pip install .
 ```
 
