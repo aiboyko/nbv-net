@@ -5,7 +5,11 @@ This repository is a modified and cleaned version of the original code for Next 
 
 The modifications are authored by Alexey I. Boyko and Dmitry Smirnov as a part of Foundations of DS class at Skoltech.
 
-## Getting Started
+## Try simplified version (non-packaged) on Colab
+[PyTorch Colab](https://colab.research.google.com/github/aiboyko/nbv-net/blob/master/NBW_net.ipynb)
+
+
+## Getting Started with the package
 ### Installation
 - Clone this repo:
 ```bash
@@ -18,17 +22,10 @@ pip install .
 ```
 
 ### Hardware requirements
-
 Due to a relatively large dataset and networks the workstation should have at least 12GB RAM and 6Gb GRAM
 
 ## Dataset
 The [original dataset](https://www.kaggle.com/miguelmg/nbv-dataset) can be downloaded from Kaggle
-
-## Try on Colab
-[PyTorch Colab](https://colab.research.google.com/github/aiboyko/nbv-net/blob/master/NBW_net.ipynb)
-
-
-Extract it to ```/dataset``` and run ```scripts/dataset preparation.py```
+Extract it to ```/dataset``` and run ```scripts/dataset_preparation.py```
   
-The package is organised using init, submodules and subpackages
-The package has __main__ file, so it can be run as a script too by 'python -m cnbv'
+The package has ```__main__.py``` file, so it can be invoked as a script by 'python -m cnbv'
