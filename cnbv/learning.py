@@ -28,25 +28,14 @@ def test(model, testloader, criterion):
     device = next(model.parameters()).device
     test_loss = 0
     accuracy = 0
-    for sample in testloader:
+    for (X, y) in testloader:
         
         # get sample data: images and ground truth keypoints
-        grids = sample['grid']
-        nbvs = sample['nbv_class']
-        
-        # convert images to FloatTensors
-        grids = grids.type(torch.FloatTensor)
-        
-        # wrap them in a torch Variable
-        grids = Variable(grids)
-        grids = grids.to(device)
-        
-        # wrap them in a torch Variable
-        nbvs = Variable(nbvs)
-        nbvs = nbvs.to(device)
-        
-        output = model.forward(grids)
-        test_loss += criterion(output, nbvs).item()
+        X = X.to(device)
+        y = y.to(device).flatten()
+                       
+        output = model.forward(X)
+        test_loss += criterion(output, y).item()
         
         # for log.  ps = torch.exp(output)
         correct_labels = (nbvs.data == output.max(dim=1)[1])
@@ -56,8 +45,8 @@ def test(model, testloader, criterion):
 
 
 
-def train(model, optimizer, train_dataloader, test_dataloader, criterion, calculate_eval=False,
-          epochs=400, layers = ""):
+def train(model, optimizer, train_dataloader, criterion,
+          epochs=400, name_of_experiment="", log_dir='/log', test_dataloader=None):
     
     device = next(model.parameters()).device
     running_loss = 0
@@ -69,7 +58,7 @@ def train(model, optimizer, train_dataloader, test_dataloader, criterion, calcul
     history_train_accuracy = []
     history_test_accuracy = []
     
-    path_to_log = os.path.join(sys.path[0], "../log/")
+    path_to_log = os.path.join(log_dir)
     
     for e in range(epochs):
         tic = time.time()
@@ -92,7 +81,7 @@ def train(model, optimizer, train_dataloader, test_dataloader, criterion, calcul
                   "Training Loss: {:.3f}.. ".format(train_loss),
                   "Training Accuracy: {:.3f}.. ".format(train_accuracy))
                 
-            if calculate_eval==True:
+            if test_dataloader is not None:
                 test_loss, test_accuracy = test(model, test_dataloader, criterion)
                 test_accuracy = test_accuracy / len(test_dataloader)
                               
@@ -104,13 +93,13 @@ def train(model, optimizer, train_dataloader, test_dataloader, criterion, calcul
                         "Test Accuracy: {:.3f}".format(val_accuracy))
                   
                 if (e % save_after) == 0:
-                    np.save(path_to_log + 'train_loss' + layers, history_train_loss)
-                    np.save(path_to_log + 'train_accuracy' + layers, history_train_accuracy)
-                    torch.save(net.state_dict(), path_to_log + 'weights' + layers + '.pth')
+                    np.save(path_to_log + 'train_loss' + name_of_experiment, history_train_loss)
+                    np.save(path_to_log + 'train_accuracy' + name_of_experiment, history_train_accuracy)
+                    torch.save(net.state_dict(), path_to_log + 'weights' + name_of_experiment + '.pth')
                                                   
                     if calculate_eval==True:
-                        np.save(path_to_log + 'test_loss' + layers, history_test_loss)
-                        np.save(path_to_log + 'test_accuracy' + layers, history_test_accuracy)
+                        np.save(path_to_log + 'test_loss' + name_of_experiment, history_test_loss)
+                        np.save(path_to_log + 'test_accuracy' + name_of_experiment, history_test_accuracy)
                                                               
         toc = time.time()
         print('time per epoch = ', toc - tic)

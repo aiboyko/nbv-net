@@ -14,10 +14,15 @@ cd nbv-net
 ```
 - Build and install
 ```bash
-python3 setup.py install
+pip install .
 ```
 
+### Hardware requirements
+
+Due to a relatively large dataset and networks the workstation should have at least 12GB RAM and 6Gb GRAM
 
 ## Dataset
 The [original dataset](https://www.kaggle.com/miguelmg/nbv-dataset) can be downloaded from Kaggle
 
+The dataset that is
+For the code to work you need t

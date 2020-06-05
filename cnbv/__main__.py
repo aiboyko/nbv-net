@@ -7,7 +7,7 @@ def get_parser():
     parser.add_argument('--continuous_validation', action="store_true")
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--n_epochs', type=int, default=400)
-    parser.add_argument('--results_dir', type=str, default="/logs")
+    parser.add_argument('--log_dir', type=str, default="/log")
     parser.add_argument('--net', type=str, default="nbv-net")
     return parser
    

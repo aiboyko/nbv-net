@@ -5,26 +5,26 @@ import os
 
 class To3DGrid(object):
     """Convert ndarrays in sample to Tensors."""
-    def __call__(self, sample):
-        grid, nbv_class = sample['grid'], sample['nbv_class']
+    def __call__(self, Xy):
+        X, y = Xy
 
         # swap color axis because
         # numpy image: H i x W j x C k
         # torch image: C k X H i X W j
-        grid = np.reshape(grid, (32,32,32))
-        return grid, nbv_class
+        X = np.reshape(X, (32,32,32))
+        return X, y
 
 
 class ToTensor(object):
     """Convert ndarrays in sample to Tensors."""
-    def __call__(self, sample):
-        grid, nbv_class = sample['grid'], sample['nbv_class']
+    def __call__(self, Xy):
+        X, y = Xy
         
         # swap color axis because
         # numpy image: H i x W j x C k
         # torch image: C k X H i X W j
         #grid = grid.transpose((2, 0, 1))
-        return torch.from_numpy(np.array([grid])), torch.tensor(nbv_class[0], dtype=torch.int64)
+        return torch.from_numpy(np.array([X])), torch.tensor(y, dtype=torch.long)
 
 
 class Dataset_NBVC_Full_numpy(Dataset):
@@ -47,7 +47,7 @@ class Dataset_NBVC_Full_numpy(Dataset):
     def __getitem__(self, idx):
         grid = self.grid_data[idx] 
         nbv_class = self.nbv_class_data[idx]
-        sample = {'grid': grid, 'nbv_class': nbv_class}
+        sample = [grid, nbv_class]
 
         if self.transform:
             sample = self.transform(sample)
