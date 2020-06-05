@@ -6,8 +6,6 @@ This repository is a modified and cleaned version of the original code for Next 
 The modifications are authored by Alexey I. Boyko and Dmitry Smirnov as a part of Foundations of DS class at Skoltech.
 
 ## Try simplified version (non-packaged) on Colab
-[PyTorch Colab](https://colab.research.google.com/github/aiboyko/nbv-net/blob/master/NBW_net.ipynb)
-
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiboyko/nbv-net/blob/master/NBW_net.ipynb)
 
 ## Getting Started with the package
