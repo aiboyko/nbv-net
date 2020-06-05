@@ -24,5 +24,7 @@ Due to a relatively large dataset and networks the workstation should have at le
 ## Dataset
 The [original dataset](https://www.kaggle.com/miguelmg/nbv-dataset) can be downloaded from Kaggle
 
-The dataset that is
-For the code to work you need t
+Extract it to ```/dataset``` and run ```scripts/dataset preparation.py```
+  
+The package is organised using init, submodules and subpackages
+The package has __main__ file, so it can be run as a script too by 'python -m cnbv'
