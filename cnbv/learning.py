@@ -56,7 +56,7 @@ def test(model, testloader, criterion):
 
 
 def train(model, optimizer, train_dataloader, test_dataloader, criterion, device='cpu', calculate_eval=False,
-          epochs=400):
+          epochs=400, layers = ""):
     
     running_loss = 0
     save_after = 1
@@ -102,13 +102,13 @@ def train(model, optimizer, train_dataloader, test_dataloader, criterion, device
                         "Test Accuracy: {:.3f}".format(val_accuracy))
                   
                 if (e % save_after) == 0:
-                    np.save(path_to_log + 'train_loss', history_train_loss)
-                    np.save(path_to_log + 'train_accuracy', history_train_accuracy)
-                    torch.save(net.state_dict(), path_to_log + 'weights' + '.pth')
+                    np.save(path_to_log + 'train_loss' + layers, history_train_loss)
+                    np.save(path_to_log + 'train_accuracy' + layers, history_train_accuracy)
+                    torch.save(net.state_dict(), path_to_log + 'weights' + layers + '.pth')
                                                   
                     if calculate_eval==True:
-                        np.save(path_to_log + 'test_loss', history_test_loss)
-                        np.save(path_to_log + 'test_accuracy', history_test_accuracy)
+                        np.save(path_to_log + 'test_loss' + layers, history_test_loss)
+                        np.save(path_to_log + 'test_accuracy' + layers, history_test_accuracy)
                                                               
         toc = time.time()
         print('time per epoch = ', toc - tic)
