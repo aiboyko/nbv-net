@@ -25,6 +25,7 @@ def validation(model, testloader, criterion, device='cpu'):
 
 
 def test(model, testloader, criterion):
+    device = next(model.parameters()).device
     test_loss = 0
     accuracy = 0
     for sample in testloader:
@@ -48,16 +49,17 @@ def test(model, testloader, criterion):
         test_loss += criterion(output, nbvs).item()
         
         # for log.  ps = torch.exp(output)
-        equality = (nbvs.data == output.max(dim=1)[1])
-        accuracy += equality.type(torch.FloatTensor).mean()
+        correct_labels = (nbvs.data == output.max(dim=1)[1])
+        accuracy += correct_labels.type(torch.FloatTensor).mean()
     
     return test_loss, accuracy
 
 
 
-def train(model, optimizer, train_dataloader, test_dataloader, criterion, device='cpu', calculate_eval=False,
+def train(model, optimizer, train_dataloader, test_dataloader, criterion, calculate_eval=False,
           epochs=400, layers = ""):
     
+    device = next(model.parameters()).device
     running_loss = 0
     save_after = 1
     
@@ -73,14 +75,14 @@ def train(model, optimizer, train_dataloader, test_dataloader, criterion, device
         tic = time.time()
         for i, (X, y) in enumerate(train_dataloader):
             optimizer.zero_grad()
-            output = model(X)
-            loss = criterion(output, y.flatten())
+            output = model(X.to(device))
+            loss = criterion(output, y.flatten().to(device))
             loss.backward()
             optimizer.step()
         
         model.eval()
         with torch.no_grad():
-            train_loss, train_accuracy = test(model, train_dataloader, criterion, device)
+            train_loss, train_accuracy = test(model, train_dataloader, criterion)
             train_accuracy = train_accuracy / len(train_dataloader)
             
             history_train_loss.append(train_loss)
@@ -91,7 +93,7 @@ def train(model, optimizer, train_dataloader, test_dataloader, criterion, device
                   "Training Accuracy: {:.3f}.. ".format(train_accuracy))
                 
             if calculate_eval==True:
-                test_loss, test_accuracy = test(model, test_dataloader, criterion, device)
+                test_loss, test_accuracy = test(model, test_dataloader, criterion)
                 test_accuracy = test_accuracy / len(test_dataloader)
                               
                 history_test_loss.append(test_loss)

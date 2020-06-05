@@ -5,7 +5,6 @@ import os
 
 class To3DGrid(object):
     """Convert ndarrays in sample to Tensors."""
-
     def __call__(self, sample):
         grid, nbv_class = sample['grid'], sample['nbv_class']
 
@@ -18,7 +17,6 @@ class To3DGrid(object):
 
 class ToTensor(object):
     """Convert ndarrays in sample to Tensors."""
-
     def __call__(self, sample):
         grid, nbv_class = sample['grid'], sample['nbv_class']
         
@@ -90,6 +88,7 @@ class Dataset_NBVC_Folder(Dataset):
         self.train_dataset, self.test_dataset = torch.utils.data.dataset.random_split(dataset=self, lengths=[train_size, validation_size])
         return self.train_dataset, self.test_dataset
 
+    
 class Dataset_NBVC_Full_torch(Dataset):
     """NBV dataset."""
     def __init__(self, vol_file, lbl_file, device='cuda:0', transform=None):
